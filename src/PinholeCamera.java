@@ -26,8 +26,8 @@ public class PinholeCamera {
 
     public void space_default() {
         direction = new Vec3(1f, 0f, 0f);
-        RIGHT = new Vec3(0f, 1f, 0f);
         UP = new Vec3(0f, 0f, 1f);
+        RIGHT = direction.cross(UP);
         position = new Vec3(0f, 0f, 2f);
     }
 
