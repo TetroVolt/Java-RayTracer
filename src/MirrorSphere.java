@@ -7,10 +7,11 @@ public class MirrorSphere extends Sphere {
     }
 
     public Color colorHit(Ray ray, ArrayList<Renderable> renderables) {
-        float t = touch(ray);
+        float t = super.touch(ray);
         if (Float.isNaN(t)) return Color.BLACK;
 
-        Ray reflect = ray.reflect(this.rhat(ray.point(t)), t);
+        Vec3 rhat = super.rhat(ray.point(t));
+        Ray reflect = ray.reflect(rhat, t);
 
         float min_dist = Float.MAX_VALUE;
         Color c = Color.black;

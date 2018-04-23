@@ -42,7 +42,7 @@ public class Vec3 {
     }
 
     public Vec3 proj(Vec3 B) {
-        return B.scale(this.dot(B) / B.dot(B));
+        return B.scale(dot(B) / B.dot(B));
     }
 
     public Vec3 negate() {
@@ -50,7 +50,7 @@ public class Vec3 {
     }
 
     public float dot(Vec3 vec) {
-        return x * vec.x + y * vec.y + z * vec.z;
+        return (x * vec.x) + (y * vec.y) + (z * vec.z);
     }
 
     public Vec3 unit() {

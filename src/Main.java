@@ -14,11 +14,13 @@ public class Main extends JPanel implements KeyListener {
     private boolean KA_DOWN = false;
     private boolean KS_DOWN = false;
     private boolean KD_DOWN = false;
+    private boolean KR_DOWN = false;
+    private boolean KF_DOWN = false;
 
     private boolean KE_DOWN = false;
     private boolean KQ_DOWN = false;
-    private boolean KR_DOWN = false;
-    private boolean KF_DOWN = false;
+    private boolean KT_DOWN = false;
+    private boolean KG_DOWN = false;
 
     private float move_velocity = 0.2f;
     private float rot_velocity = 0.1f;
@@ -57,6 +59,14 @@ public class Main extends JPanel implements KeyListener {
                 KF_DOWN = true;
                 break;
 
+            case KeyEvent.VK_T:
+                KT_DOWN = true;
+                break;
+            case KeyEvent.VK_G:
+                KG_DOWN = true;
+                break;
+
+
             case KeyEvent.VK_SPACE:
                 camera.space_default();
                 break;
@@ -92,6 +102,13 @@ public class Main extends JPanel implements KeyListener {
                 KF_DOWN = false;
                 break;
 
+            case KeyEvent.VK_T:
+                KT_DOWN = false;
+                break;
+            case KeyEvent.VK_G:
+                KG_DOWN = false;
+                break;
+
         }
     }
 
@@ -123,13 +140,14 @@ public class Main extends JPanel implements KeyListener {
         if (KS_DOWN) camera.move_forward(-move_velocity);
         if (KD_DOWN) camera.move_right(move_velocity);
         if (KA_DOWN) camera.move_right(-move_velocity);
+        if (KR_DOWN) camera.move_up(move_velocity);
+        if (KF_DOWN) camera.move_up(-move_velocity);
 
         // camera rotation
         if (KE_DOWN) camera.yaw(rot_velocity);
         if (KQ_DOWN) camera.yaw(-rot_velocity);
-        if (KR_DOWN) camera.pitch(rot_velocity);
-        if (KF_DOWN) camera.pitch(-rot_velocity);
-
+        if (KG_DOWN) camera.pitch(rot_velocity);
+        if (KT_DOWN) camera.pitch(-rot_velocity);
 
         camera.render_perspective(renderables);
         graphics.drawImage(camera.getImage(), 0, 0, null);

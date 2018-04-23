@@ -25,7 +25,7 @@ public class Plane extends Renderable {
     @Override
     public Color colorHit(Ray ray) {
         float t = touch(ray);
-        if (Float.isNaN(t)) return color.BLACK;
+        if (Float.isNaN(t) || t <= 0) return color.BLACK;
 
         Vec3 point = ray.point(t);
         int x = (int)Math.ceil(point.getX()), y = (int)Math.ceil(point.getY());
@@ -36,13 +36,15 @@ public class Plane extends Renderable {
             c = Color.BLACK;
         }
 
+        if (t <= 0.01) return c; // a hack to make it not crash when perpendicularly sinking into plane
+
         int red = c.getRed();
         int green = c.getGreen();
         int blue = c.getBlue();
 
-        red = Math.min(red, 6*(int)(red / (t)));
-        green = Math.min(green, 6*(int)(green / (t)));
-        blue = Math.min(blue, 6*(int)(blue / (t)));
+        red = Math.min(c.getRed(),      6*(int)(red / t)  );
+        green = Math.min(c.getGreen(),  6*(int)(green / t));
+        blue = Math.min(c.getBlue(),    6*(int)(blue / t) );
 
         //return color;
         return new Color(red, green, blue);
