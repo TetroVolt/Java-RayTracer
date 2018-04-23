@@ -25,8 +25,10 @@ public class LensSphere extends MirrorSphere {
             float dist = renderable.touch(reflect);
             if (!Float.isNaN(dist) && dist < min_dist) {
                 min_dist = dist;
-                if (renderable instanceof MirrorSphere) {
-                    ((MirrorSphere)renderable).colorHit(reflect, renderables, n_reflections-1);
+                if (renderable instanceof LensSphere) {
+                    c = ((LensSphere) renderable).colorHit(reflect, renderables, n_reflections-1);
+                } else if (renderable instanceof MirrorSphere) {
+                    c = ((MirrorSphere)renderable).colorHit(reflect, renderables, n_reflections);
                 } else {
                     c = renderable.colorHit(reflect);
                 }

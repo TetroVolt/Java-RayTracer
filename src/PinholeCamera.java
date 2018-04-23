@@ -91,7 +91,7 @@ public class PinholeCamera {
                     if (!Float.isNaN(dist) && dist < min_dist) {
                         min_dist = dist;
                         if (renderable instanceof MirrorSphere) {
-                            color = ((MirrorSphere)renderable).colorHit(ray, renderables, 2);
+                            color = ((MirrorSphere)renderable).colorHit(ray, renderables, 3);
                         } else {
                             color = renderable.colorHit(ray);
                         }
