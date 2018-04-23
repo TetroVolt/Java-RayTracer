@@ -28,7 +28,7 @@ public class PinholeCamera {
         direction = new Vec3(1f, 0f, 0f);
         RIGHT = new Vec3(0f, 1f, 0f);
         UP = new Vec3(0f, 0f, 1f);
-        position = new Vec3(0f, 0f, 1f);
+        position = new Vec3(0f, 0f, 2f);
     }
 
     public void pitch(float t) {
