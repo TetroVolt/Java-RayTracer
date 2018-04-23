@@ -1,8 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MirrorSphere extends Sphere {
-    public MirrorSphere(float radius, Vec3 position)  {
+
+public class LensSphere extends MirrorSphere {
+    public LensSphere(float radius, Vec3 position)  {
         super(radius, position);
     }
 
@@ -13,7 +14,7 @@ public class MirrorSphere extends Sphere {
         if (Float.isNaN(t)) return Color.BLACK;
 
         Vec3 rhat = super.rhat(ray.point(t));
-        Ray reflect = ray.reflect(rhat, t);
+        Ray reflect = ray.refract(rhat, t);
 
         float min_dist = Float.MAX_VALUE;
         Color c = Color.black;

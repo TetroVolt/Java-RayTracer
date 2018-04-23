@@ -24,5 +24,13 @@ public class Ray {
         Vec3 D = direction.sub(direction.proj(norm).scale(2)).unit();
         return new Ray(O,D);
     }
+
+    public Ray refract(Vec3 norm, float t) {
+        Vec3 O = point(t);
+        Vec3 r = direction.proj(norm).sub(direction);
+        Vec3 D = direction.sub(r.scale(0.5f));
+        return new Ray(O,D);
+    }
+
 }
 
