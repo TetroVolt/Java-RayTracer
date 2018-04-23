@@ -74,9 +74,12 @@ public class PinholeCamera {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 float UPScale = -(y - height / 2) * pixel_len;
-                float RIGHTScale = -(x - width / 2) * pixel_len;
+                float RIGHTScale = (x - width / 2) * pixel_len;
 
-                Vec3 P = canvas_center.sub(UP.scale(UPScale), RIGHT.scale(RIGHTScale));
+                Vec3 P = canvas_center.sub(
+                        UP.scale(UPScale),
+                        RIGHT.scale(RIGHTScale)
+                );
                 Vec3 D = position.sub(P);
                 Ray ray = new Ray(P, D);
 
@@ -95,7 +98,8 @@ public class PinholeCamera {
                     }
                 }
 
-                image.setRGB(width - x - 1, height - y - 1, color.getRGB());
+                //image.setRGB(width - x - 1, y, color.getRGB());
+                image.setRGB(x, y, color.getRGB());
             }
         }
     }

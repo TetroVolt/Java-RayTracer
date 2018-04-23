@@ -147,7 +147,7 @@ public class Main extends JPanel implements KeyListener {
         Sphere s1 = new Sphere(1f, Color.RED, new Vec3(0f, -1f,1f));
         Sphere s2 = new Sphere(1f, Color.GREEN, new Vec3(0f, +1f,1f));
         Sphere s3 = new Sphere(1f, Color.BLUE, new Vec3(0f, 0f, (float)(1+2*Math.sin(Math.PI/3))));
-        MirrorSphere ms = new MirrorSphere(1f, new Vec3(-2.5f, 0f, 2f));
+        MirrorSphere ms = new MirrorSphere(1f, new Vec3(-4f, 0f, 2f));
         Plane plane = new Plane();
 
         ArrayList<Renderable> renderables = new ArrayList<>();
