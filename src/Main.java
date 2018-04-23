@@ -29,7 +29,6 @@ public class Main extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         int key = keyEvent.getKeyCode();
-        float velocity = 0.2f;
         switch (key) {
             case KeyEvent.VK_W:
                 KW_DOWN = true;
@@ -148,6 +147,7 @@ public class Main extends JPanel implements KeyListener {
         Sphere s1 = new Sphere(1f, Color.RED, new Vec3(0f, -1f,1f));
         Sphere s2 = new Sphere(1f, Color.GREEN, new Vec3(0f, +1f,1f));
         Sphere s3 = new Sphere(1f, Color.BLUE, new Vec3(0f, 0f, (float)(1+2*Math.sin(Math.PI/3))));
+        MirrorSphere ms = new MirrorSphere(1f, new Vec3(-2.5f, 0f, 2f));
         Plane plane = new Plane();
 
         ArrayList<Renderable> renderables = new ArrayList<>();
@@ -163,6 +163,7 @@ public class Main extends JPanel implements KeyListener {
         renderables.add(s2);
         renderables.add(s3);
         renderables.add(plane);
+        renderables.add(ms);
 
         Main main = new Main(width, height, camera, renderables);
     }

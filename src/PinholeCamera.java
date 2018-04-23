@@ -68,15 +68,15 @@ public class PinholeCamera {
     public void render_perspective(ArrayList<Renderable> renderables) {
 
         float canvas_distance = (float)(1.0 / Math.tan( Math.toRadians(FOV) / 2 ));
-        Vec3 canvas_center = position.sub(direction.scale(canvas_distance));
+        Vec3 canvas_center = position.add(direction.scale(-canvas_distance));
 
         float pixel_len = 2f / width;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                float UPScale = (y - height / 2) * pixel_len;
-                float RIGHTScale = (x - width / 2) * pixel_len;
+                float UPScale = -(y - height / 2) * pixel_len;
+                float RIGHTScale = -(x - width / 2) * pixel_len;
 
-                Vec3 P = canvas_center.add(UP.scale(UPScale), RIGHT.scale(RIGHTScale));
+                Vec3 P = canvas_center.sub(UP.scale(UPScale), RIGHT.scale(RIGHTScale));
                 Vec3 D = position.sub(P);
                 Ray ray = new Ray(P, D);
 
@@ -87,11 +87,15 @@ public class PinholeCamera {
                     float dist = renderable.touch(ray);
                     if (!Float.isNaN(dist) && dist < min_dist) {
                         min_dist = dist;
-                        color = renderable.colorHit(ray);
+                        if (renderable instanceof MirrorSphere) {
+                            color = ((MirrorSphere)renderable).colorHit(ray, renderables);
+                        } else {
+                            color = renderable.colorHit(ray);
+                        }
                     }
                 }
 
-                image.setRGB(width - x - 1, y, color.getRGB());
+                image.setRGB(width - x - 1, height - y - 1, color.getRGB());
             }
         }
     }

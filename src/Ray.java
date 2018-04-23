@@ -21,7 +21,7 @@ public class Ray {
 
     public Ray reflect(Vec3 norm, float t) {
         Vec3 O = point(t);
-        Vec3 D = direction.sub(direction.proj(norm).scale(2));
+        Vec3 D = direction.add(direction.proj(norm).scale(-2)).unit();
         return new Ray(O, D);
     }
 }

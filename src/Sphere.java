@@ -57,7 +57,7 @@ public class Sphere extends Renderable {
     }
 
     public Vec3 rhat(Vec3 point) {
-        return point.sub(origin);
+        return point.sub(origin).unit();
     }
 
     @Override
