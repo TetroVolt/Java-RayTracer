@@ -81,7 +81,7 @@ public class PinholeCamera {
                         RIGHT.scale(RIGHTScale)
                 );
                 Vec3 D = position.sub(P);
-                Ray ray = new Ray(P, D);
+                Ray ray = new Ray(position, D);
 
                 float min_dist = Float.MAX_VALUE;
                 Color color = Color.black;

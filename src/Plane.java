@@ -28,7 +28,7 @@ public class Plane extends Renderable {
         if (Float.isNaN(t)) return color.BLACK;
 
         Vec3 point = ray.point(t);
-        int x = (int)point.getX(), y = (int)point.getY();
+        int x = (int)Math.ceil(point.getX()), y = (int)Math.ceil(point.getY());
         x = Math.abs(x);
         y = Math.abs(y);
         Color c = Color.WHITE;
