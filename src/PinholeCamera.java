@@ -46,7 +46,10 @@ public class PinholeCamera {
     }
 
     public void roll(float t) {
-
+        float sin = (float)Math.sin(t);
+        float cos = (float)Math.cos(t);
+        RIGHT = RIGHT.scale(cos).add(UP.scale(sin)).unit();
+        UP = RIGHT.scale(-sin).add(UP.scale(cos)).unit();
     }
 
     public PinholeCamera(int width, int height, Vec3 position, Vec3 direction, Vec3 UP) {

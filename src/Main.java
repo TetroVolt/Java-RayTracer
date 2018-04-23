@@ -21,6 +21,8 @@ public class Main extends JPanel implements KeyListener {
     private boolean KQ_DOWN = false;
     private boolean KT_DOWN = false;
     private boolean KG_DOWN = false;
+    private boolean KZ_DOWN = false;
+    private boolean KC_DOWN = false;
 
     private float move_velocity = 0.2f;
     private float rot_velocity = 0.1f;
@@ -44,14 +46,6 @@ public class Main extends JPanel implements KeyListener {
             case KeyEvent.VK_D:
                 KD_DOWN = true;
                 break;
-
-            case KeyEvent.VK_E:
-                KE_DOWN = true;
-                break;
-            case KeyEvent.VK_Q:
-                KQ_DOWN = true;
-                break;
-
             case KeyEvent.VK_R:
                 KR_DOWN = true;
                 break;
@@ -59,12 +53,25 @@ public class Main extends JPanel implements KeyListener {
                 KF_DOWN = true;
                 break;
 
+            case KeyEvent.VK_E:
+                KE_DOWN = true;
+                break;
+            case KeyEvent.VK_Q:
+                KQ_DOWN = true;
+                break;
             case KeyEvent.VK_T:
                 KT_DOWN = true;
                 break;
             case KeyEvent.VK_G:
                 KG_DOWN = true;
                 break;
+            case KeyEvent.VK_Z:
+                KZ_DOWN = true;
+                break;
+            case KeyEvent.VK_C:
+                KC_DOWN = true;
+                break;
+
 
 
             case KeyEvent.VK_SPACE:
@@ -109,6 +116,13 @@ public class Main extends JPanel implements KeyListener {
                 KG_DOWN = false;
                 break;
 
+            case KeyEvent.VK_Z:
+                KZ_DOWN = false;
+                break;
+            case KeyEvent.VK_C:
+                KC_DOWN = false;
+                break;
+
         }
     }
 
@@ -148,6 +162,8 @@ public class Main extends JPanel implements KeyListener {
         if (KQ_DOWN) camera.yaw(-rot_velocity);
         if (KG_DOWN) camera.pitch(rot_velocity);
         if (KT_DOWN) camera.pitch(-rot_velocity);
+        if (KZ_DOWN) camera.roll(rot_velocity);
+        if (KC_DOWN) camera.roll(-rot_velocity);
 
         camera.render_perspective(renderables);
         graphics.drawImage(camera.getImage(), 0, 0, null);
