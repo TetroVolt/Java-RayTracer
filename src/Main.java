@@ -126,26 +126,6 @@ public class Main extends JPanel implements KeyListener {
         }
     }
 
-    private Main(int width, int height, PinholeCamera camera, ArrayList<Renderable> renderables) {
-        assert(width > 0 && height > 0);
-
-        this.setSize(width, height);
-
-        frame = new JFrame("Render test");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.add(this);
-        frame.setSize(width+2, height + 24);
-        frame.setResizable(false);
-        frame.setVisible(true);
-
-        this.setVisible(true);
-        this.camera = camera;
-        this.renderables = renderables;
-
-        this.setFocusable(true);
-        this.addKeyListener(this);
-    }
 
     @Override
     public void paint(Graphics graphics) {
@@ -168,11 +148,29 @@ public class Main extends JPanel implements KeyListener {
         camera.render_perspective(renderables);
         graphics.drawImage(camera.getImage(), 0, 0, null);
         repaint();
+
+        Sphere s1 = (Sphere)renderables.get(0);
+        Sphere s2 = (Sphere)renderables.get(1);
+        s1.setOrigin(s1.getOrigin().rotateZ(rot_velocity));
+        s2.setOrigin(s2.getOrigin().rotateZ(rot_velocity));
     }
 
-    public static void image_demo() {
-        int width = 1000;
-        int height =  width * 9 / 16;
+    private Main(int width, int height) {
+        assert(width > 0 && height > 0);
+
+        this.setSize(width, height);
+
+        frame = new JFrame("Render test");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.add(this);
+        frame.setSize(width+2, height + 24);
+        frame.setResizable(false);
+        frame.setVisible(true);
+
+        this.setVisible(true);
+        this.camera = camera;
+        this.renderables = renderables;
 
         //Vec3 camera_pos = new Vec3(5f,5f,2f);
         Vec3 camera_pos = new Vec3(0, 0, 2);
@@ -182,12 +180,12 @@ public class Main extends JPanel implements KeyListener {
         Sphere s1 = new Sphere(1f, Color.GREEN, new Vec3(0f, -2.1f,2f));
         Sphere s2 = new Sphere(1f, Color.BLUE, new Vec3(0f, 2.1f,2f));
         MirrorSphere ms1 = new MirrorSphere(1f, new Vec3(0f, 0f, 2f));
-        LensSphere ms3 = new LensSphere(0.7f, new Vec3(-5f, 0f, 2f));
+        LensSphere ms3 = new LensSphere(1.2f, new Vec3(-7f, 0f, 2f));
         Plane plane = new Plane();
 
-        ArrayList<Renderable> renderables = new ArrayList<>();
+        renderables = new ArrayList<>();
 
-        PinholeCamera camera = new PinholeCamera(
+        camera = new PinholeCamera(
                 width, height,
                 camera_pos,
                 camera_dir,
@@ -200,7 +198,15 @@ public class Main extends JPanel implements KeyListener {
         renderables.add(ms1);
         renderables.add(ms3);
 
-        Main main = new Main(width, height, camera, renderables);
+        this.setFocusable(true);
+        this.addKeyListener(this);
+    }
+
+
+    public static void image_demo() {
+        int width = 600;
+        int height =  width * 9 / 16;
+        Main main = new Main(width, height);
     }
 
     public static void main(String[] args) {

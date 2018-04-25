@@ -31,6 +31,28 @@ public class Vec3 {
         return new Vec3(X,Y,Z);
     }
 
+    public Vec3 rotateX(float theta) {
+        float sin = (float)Math.sin(theta);
+        float cos = (float)Math.cos(theta);
+        float Y = cos * y + -sin*z;
+        float Z = sin * y + cos*z;
+        return new Vec3(x, Y, Z);
+    }
+    public Vec3 rotateY(float theta) {
+        float sin = (float)Math.sin(theta);
+        float cos = (float)Math.cos(theta);
+        float X = cos * x + sin * y;
+        float Z = -sin * x + cos * z;
+        return new Vec3(X, y, Z);
+    }
+    public Vec3 rotateZ(float theta){
+        float sin = (float)Math.sin(theta);
+        float cos = (float)Math.cos(theta);
+        float X = cos * x + -sin * y;
+        float Y = sin * x + cos * y;
+        return new Vec3(X, Y, z);
+    }
+
     public Vec3 sub(Vec3 vec, Vec3 ... vecs) {
         float X = x - vec.x, Y = y - vec.y, Z = z - vec.z;
         for (Vec3 v : vecs) {

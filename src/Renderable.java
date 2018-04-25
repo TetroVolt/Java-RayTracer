@@ -8,10 +8,11 @@ public abstract class Renderable {
         return color;
     }
     public void setColor(Color color) { this.color = color; }
+
     public Vec3 getOrigin() {
         return origin;
     }
-    public void getOrigin(Vec3 origin) { this.origin = origin; }
+    public void setOrigin(Vec3 origin) { this.origin = origin; }
 
     public abstract boolean hit(Ray ray);
     public abstract float touch(Ray ray);
