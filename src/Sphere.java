@@ -2,8 +2,8 @@
 import java.awt.Color;
 
 public class Sphere extends Renderable {
-    private Color color;
-    private float radius;
+    protected Color color;
+    protected float radius;
 
     public Sphere(float radius, Vec3 position) {
         this.radius = radius;
@@ -38,9 +38,10 @@ public class Sphere extends Renderable {
         Vec3 CO = ray.getOrigin().sub(this.origin);
         float base = (ray.getDirection().dot(CO));
         float disc = base*base - CO.dot(CO) + radius*radius;
-        ret[0] = ret[1] = (float)Math.sqrt(disc);
-        ret[0] = -base + ret[0];
-        ret[1] = -base - ret[0];
+        disc = (float)Math.sqrt(disc);
+
+        ret[0] = -base - disc;
+        ret[1] = -base + disc;
 
         return ret;
     }
@@ -49,10 +50,10 @@ public class Sphere extends Renderable {
         if (ray.getOrigin().sub(getOrigin()).mag() <= radius) return Float.NaN;
         float[] T = intersect(ray);
         if (Float.isNaN(T[0])) return Float.NaN;
-        float mins = Math.min(T[0], T[1]);
-        float maxs = Math.max(T[0], T[1]);
-        if (mins > 0) return mins;
-        if (maxs > 0) return maxs;
+        float min = Math.min(T[0], T[1]);
+        float max = Math.max(T[0], T[1]);
+        if (min > 0) return min;
+        if (max > 0) return max;
         return Float.NaN;
     }
 
@@ -69,9 +70,9 @@ public class Sphere extends Renderable {
         int green = color.getGreen();
         int blue = color.getBlue();
 
-        red = Math.min(red, 6*(int)(color.getRed() / (t)));
-        green = Math.min(green, 6*(int)(color.getGreen() / (t)));
-        blue = Math.min(blue, 6*(int)(color.getBlue() / (t)));
+        red = Math.min(red, 8*(int)(color.getRed() / (t)));
+        green = Math.min(green, 8*(int)(color.getGreen() / (t)));
+        blue = Math.min(blue, 8*(int)(color.getBlue() / (t)));
 
         //return color;
         return new Color(red, green, blue);

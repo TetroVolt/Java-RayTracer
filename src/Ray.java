@@ -20,17 +20,19 @@ public class Ray {
     public Vec3 getDirection() { return direction; }
 
     public Ray reflect(Vec3 norm, float t) {
-        Vec3 O = point(t);
-        Vec3 D = direction.sub(direction.proj(norm).scale(2)).unit();
-        return new Ray(O,D);
+        Vec3 D = direction.sub(direction.proj(norm).scale(2));
+        return new Ray(point(t), D);
     }
 
-    public Ray refract(Vec3 norm, float t) {
+    public Ray refract(Vec3 norm, float t, float N1, float N2) {
         Vec3 O = point(t);
         Vec3 r = direction.proj(norm).sub(direction);
-        Vec3 D = direction.sub(r.scale(0.5f));
+        Vec3 D = direction.add(r.scale(1 - N1 / N2)).unit();
         return new Ray(O,D);
     }
 
+    public String toString() {
+        return "O:" + origin.toString() + ", D:" + direction.toString();
+    }
 }
 

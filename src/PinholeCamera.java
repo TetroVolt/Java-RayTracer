@@ -56,7 +56,7 @@ public class PinholeCamera {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.width = width;
         this.height = height;
-        FOV = 70;
+        FOV = 60;
 
         this.position = position;
         this.direction = direction.unit();

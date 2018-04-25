@@ -171,19 +171,18 @@ public class Main extends JPanel implements KeyListener {
     }
 
     public static void image_demo() {
-        int width = 800;
+        int width = 600;
         int height =  width * 9 / 16;
 
-        Vec3 camera_pos = new Vec3(5f,5f,2f);
-        Vec3 camera_dir = new Vec3(-1f,-1f,0f).unit();
+        //Vec3 camera_pos = new Vec3(5f,5f,2f);
+        Vec3 camera_pos = new Vec3(0, 0, 2);
+        Vec3 camera_dir = new Vec3(1f,0f,0f).unit();
         Vec3 camera_up  = new Vec3(0f,0f,1f);
 
-        Sphere s1 = new Sphere(1f, Color.RED, new Vec3(0f, -1f,1f));
-        Sphere s2 = new Sphere(1f, Color.GREEN, new Vec3(0f, +1f,1f));
-        Sphere s3 = new Sphere(1f, Color.BLUE, new Vec3(0f, 0f, (float)(1+2*Math.sin(Math.PI/3))));
-        MirrorSphere ms1 = new MirrorSphere(1f, new Vec3(-4f, -2f, 2f));
-        LensSphere ms2 = new LensSphere(1f, new Vec3(-4f, +2f, 2f));
-        LensSphere ms3 = new LensSphere(0.2f, new Vec3(-4f,0f, 2f));
+        Sphere s1 = new Sphere(1f, Color.GREEN, new Vec3(0f, -2.1f,2f));
+        Sphere s2 = new Sphere(1f, Color.BLUE, new Vec3(0f, 2.1f,2f));
+        MirrorSphere ms1 = new MirrorSphere(1f, new Vec3(5f, 0f, 2f));
+        LensSphere ms3 = new LensSphere(1f, new Vec3(-5f, 0f, 2f));
         Plane plane = new Plane();
 
         ArrayList<Renderable> renderables = new ArrayList<>();
@@ -197,10 +196,8 @@ public class Main extends JPanel implements KeyListener {
 
         renderables.add(s1);
         renderables.add(s2);
-        renderables.add(s3);
         renderables.add(plane);
         renderables.add(ms1);
-        renderables.add(ms2);
         renderables.add(ms3);
 
         Main main = new Main(width, height, camera, renderables);
