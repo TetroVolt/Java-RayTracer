@@ -14,13 +14,13 @@ public class LensSphere extends MirrorSphere {
         if (Float.isNaN(t1) || t1 <= 0) return Color.BLACK;
 
         Vec3 rhat = super.rhat(ray.point(t1));
-        Ray refract = ray.refract(rhat, t1, 1f, 1.2f);
+        Ray refract = ray.refract(rhat, t1, 1f, 1.1f);
 
         refract = new Ray(refract.point(0.01f), refract.getDirection());
         float t2 = super.intersect(refract)[1];
         if (Float.isNaN(t2) || t2 <= 0) return Color.BLACK;
         rhat = super.rhat(refract.point(t2));
-        refract = refract.refract(rhat, t2, 1.2f, 1f);
+        refract = refract.refract(rhat, t2, 1.1f, 1f);
 
         float min_dist = Float.MAX_VALUE;
         Color c = Color.black;

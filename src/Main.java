@@ -171,7 +171,7 @@ public class Main extends JPanel implements KeyListener {
     }
 
     public static void image_demo() {
-        int width = 600;
+        int width = 1000;
         int height =  width * 9 / 16;
 
         //Vec3 camera_pos = new Vec3(5f,5f,2f);
@@ -181,8 +181,8 @@ public class Main extends JPanel implements KeyListener {
 
         Sphere s1 = new Sphere(1f, Color.GREEN, new Vec3(0f, -2.1f,2f));
         Sphere s2 = new Sphere(1f, Color.BLUE, new Vec3(0f, 2.1f,2f));
-        MirrorSphere ms1 = new MirrorSphere(1f, new Vec3(5f, 0f, 2f));
-        LensSphere ms3 = new LensSphere(1f, new Vec3(-5f, 0f, 2f));
+        MirrorSphere ms1 = new MirrorSphere(1f, new Vec3(0f, 0f, 2f));
+        LensSphere ms3 = new LensSphere(0.7f, new Vec3(-5f, 0f, 2f));
         Plane plane = new Plane();
 
         ArrayList<Renderable> renderables = new ArrayList<>();
